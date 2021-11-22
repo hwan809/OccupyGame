@@ -1,0 +1,7 @@
+name: DasuOccupy
+version: '${project.version}'
+main: me.dasuonline.vivace.Main
+authors: [ vivace ]
+commands:
+  팀:
+    usage: /팀 <도움말>
