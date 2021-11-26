@@ -19,15 +19,16 @@ public class TeamCommands implements CommandExecutor {
         String name = command.getName();
 
         if (!name.equals(cmd1)) return false;
-        if (sender instanceof Player) {
+
+        if (!(sender instanceof Player)) {
             sender.sendMessage(ChatColor.RED + "플레이어만 사용할 수 있습니다.");
-            return false;
+            return true;
         }
 
         String args0 = args[0];
 
         if (TeamManager.argsMap.containsKey(args0)) {
-            return TeamManager.argsMap.get(args0).execute();
+            return TeamManager.argsMap.get(args0).execute((Player) sender, args);
         }
 
         return false;
