@@ -12,7 +12,6 @@ import java.util.Map;
 public class TeamCommands implements CommandExecutor {
 
     public final static String cmd1 = "팀";
-    public static Map<String, Object> argsMap = new HashMap<>();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -24,6 +23,8 @@ public class TeamCommands implements CommandExecutor {
             sender.sendMessage(ChatColor.RED + "플레이어만 사용할 수 있습니다.");
             return true;
         }
+
+        if (args.length == 0) return false;
 
         String args0 = args[0];
 

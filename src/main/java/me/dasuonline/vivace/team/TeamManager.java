@@ -50,7 +50,7 @@ public class TeamManager implements Manager {
 
     @Override
     public void logMessage(Player p, String s) {
-        p.sendMessage("[§a TEAM §a] > " + ChatColor.WHITE + s);
+        p.sendMessage("[§a TEAM §f] > " + s);
     }
 
     @Override

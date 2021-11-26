@@ -4,4 +4,4 @@ main: me.dasuonline.vivace.Main
 authors: [ vivace ]
 commands:
   팀:
-    usage: [§aTEAM§a] [e/팀 도움말 <페이지 번호e]
+    usage: "[ §aTEAM§f ] > [ §e/팀 도움말 <페이지 번호>§f ]"
