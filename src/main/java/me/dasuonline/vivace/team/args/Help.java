@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Help implements CustomExecutor {
 
-    public static ArrayList<String[]> helpmessages = new ArrayList<>();
+    private ArrayList<String[]> helpMessages = new ArrayList<>();
     private Manager teamManager;
 
     @Override
@@ -26,12 +26,12 @@ public class Help implements CustomExecutor {
             return true;
         }
 
-        if (helpcode > helpmessages.size()) {
-            teamManager.logMessage(player, ChatColor.RED + "도움말 PAGE 1 ~ " + helpmessages.size());
+        if (helpcode > helpMessages.size()) {
+            teamManager.logMessage(player, ChatColor.RED + "도움말 PAGE 1 ~ " + helpMessages.size());
             return true;
         }
 
-        for (String helpm : helpmessages.get(helpcode - 1)) {
+        for (String helpm : helpMessages.get(helpcode - 1)) {
             player.sendMessage(helpm);
         }
 
@@ -40,7 +40,7 @@ public class Help implements CustomExecutor {
 
     @Override
     public void init() {
-        helpmessages.add(
+        helpMessages.add(
                 new String[]
                         {"§8§m            §f§8[ §aTEAM §f§8]§8§m            ",
                          "",
@@ -53,7 +53,7 @@ public class Help implements CustomExecutor {
                          "                    §epage (1 / 3)"}
         );
 
-        helpmessages.add(
+        helpMessages.add(
                 new String[]
                         {"§8§m            §f§8[ §aTEAM §f§8]§8§m            ",
                                 "",
@@ -66,7 +66,7 @@ public class Help implements CustomExecutor {
                                 "                    §epage (2 / 3)"}
         );
 
-        helpmessages.add(
+        helpMessages.add(
                 new String[]
                         {"§8§m            §f§8[ §aTEAM §f§8]§8§m            ",
                                 "",

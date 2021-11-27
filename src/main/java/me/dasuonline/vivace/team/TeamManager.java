@@ -4,7 +4,6 @@ import me.dasuonline.vivace.Main;
 import me.dasuonline.vivace.commands.interfaces.CustomExecutor;
 import me.dasuonline.vivace.commands.interfaces.Manager;
 import me.dasuonline.vivace.team.args.*;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -15,6 +14,8 @@ import java.util.Map;
 public class TeamManager implements Manager {
     public static Map<String, CustomExecutor> argsMap = new HashMap<>();
     public static List<CustomExecutor> argsExecutor = new ArrayList<>();
+
+    public static List<MinecraftTeam> teamList = new ArrayList<>();
 
     private void setArgsMap() {
         argsMap.put("도움말", new Help());
