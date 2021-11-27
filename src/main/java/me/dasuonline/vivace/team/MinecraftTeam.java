@@ -1,11 +1,9 @@
 package me.dasuonline.vivace.team;
 
-import jdk.internal.foreign.PlatformLayouts;
 import lombok.Getter;
 import me.dasuonline.vivace.team.manager.TeamUtils;
 import org.bukkit.entity.Player;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +15,8 @@ public class MinecraftTeam {
     String uniqueId;
 
     Player admin;
-    List<Player> viceAdmin;
-    List<Player> teamMember;
+    List<Player> viceAdmins;
+    List<Player> teamMembers;
 
     List<String> inviteCode;
 
@@ -27,8 +25,8 @@ public class MinecraftTeam {
         this.createdTime = createdTime;
         this.admin = admin;
 
-        this.viceAdmin = new ArrayList<>();
-        this.teamMember = new ArrayList<>();
+        this.viceAdmins = new ArrayList<>();
+        this.teamMembers = new ArrayList<>();
         this.inviteCode = new ArrayList<>();
 
         this.uniqueId = TeamUtils.getUniqueId();
@@ -38,17 +36,33 @@ public class MinecraftTeam {
         this.name = name;
         this.createdTime = createdTime;
         this.admin = admin;
-        this.viceAdmin = viceAdmin;
-        this.teamMember = teamMember;
+        this.viceAdmins = viceAdmin;
+        this.teamMembers = teamMember;
 
         this.inviteCode = new ArrayList<>();
         this.uniqueId = TeamUtils.getUniqueId();
     }
 
     public boolean addMember(Player player) {
-        teamMember.add(player);
+        teamMembers.add(player);
 
         return true;
+    }
+
+    public boolean addViceAdmin(Player player) {
+        teamMembers.remove(player);
+        viceAdmins.add(player);
+
+        return true;
+    }
+
+    public void sendMessage(Player p, String message) {
+        String pmessage = "[§a TEAM §f] > [ " + p.getName() + " ] " + message;
+
+        admin.sendMessage(pmessage);
+
+        for (Player va : viceAdmins) va.sendMessage(pmessage);
+        for (Player mb : teamMembers) mb.sendMessage(pmessage);
     }
 
     public void addInviteCode(String code) {
@@ -60,13 +74,13 @@ public class MinecraftTeam {
     }
 
     public boolean removePlayer(Player player) {
-        if (viceAdmin.contains(player)) {
-            viceAdmin.remove(player);
+        if (viceAdmins.contains(player)) {
+            viceAdmins.remove(player);
             return true;
         }
 
-        if (teamMember.contains(player)) {
-            teamMember.remove(player);
+        if (teamMembers.contains(player)) {
+            teamMembers.remove(player);
             return true;
         }
 

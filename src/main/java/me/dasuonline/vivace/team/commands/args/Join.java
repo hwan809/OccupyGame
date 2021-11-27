@@ -44,7 +44,7 @@ public class Join extends TeamUtils implements CustomExecutor {
             return true;
         }
 
-        nowTeam.getTeamMember().add(player);
+        nowTeam.addMember(player);
         teamManager.logMessage(player, "[ " + teamName + " ]" + ChatColor.GREEN + " 팀에 가입했습니다!");
 
         nowTeam.removeInviteCode(inviteCode);

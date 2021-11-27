@@ -32,8 +32,8 @@ public class TeamUtils {
     public MinecraftTeam getPlayerTeam(Player player) {
         for (MinecraftTeam team : TeamManager.teamList) {
             if (team.getAdmin().equals(player) ||
-                    team.getTeamMember().contains(player) ||
-                    team.getViceAdmin().contains(player)) {
+                    team.getTeamMembers().contains(player) ||
+                    team.getViceAdmins().contains(player)) {
                 return team;
             }
         }
@@ -62,8 +62,8 @@ public class TeamUtils {
     }
 
     public boolean isPlayerTeamMember(Player player, MinecraftTeam team) {
-        List<Player> teamMembers = team.getTeamMember();
-        List<Player> teamviceAdmins = team.getViceAdmin();
+        List<Player> teamMembers = team.getTeamMembers();
+        List<Player> teamviceAdmins = team.getViceAdmins();
 
         return teamMembers.contains(player) ||
                 teamviceAdmins.contains(player) ||
@@ -73,8 +73,8 @@ public class TeamUtils {
     public boolean isPlayerMember(Player player) {
         for (MinecraftTeam team : TeamManager.teamList) {
             if (team.getAdmin().equals(player) ||
-                    team.getTeamMember().contains(player) ||
-                    team.getViceAdmin().contains(player)) {
+                    team.getTeamMembers().contains(player) ||
+                    team.getViceAdmins().contains(player)) {
                 return true;
             }
         }

@@ -9,11 +9,19 @@ import java.util.List;
 
 public final class Main extends JavaPlugin {
 
+    private static Main instance;
+
+    public static Main getInstance() {
+        return instance;
+    }
+
     public static List<Manager> systemManagers = new ArrayList<>();
 
     @Override
     public void onEnable() {
         // Plugin startup logic
+        instance = this;
+
         systemManagers.add(new TeamManager());
 
         for (Manager classes : systemManagers) {
