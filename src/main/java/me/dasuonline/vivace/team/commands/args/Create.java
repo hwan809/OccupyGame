@@ -29,7 +29,7 @@ public class Create extends TeamUtils implements CustomExecutor {
 
         String teamName = args[1];
 
-        if (containsTeam(teamName)) {
+        if (containsTeamName(teamName)) {
             teamManager.logMessage(player, ChatColor.RED + "이미 존재하는 [팀 이름] 입니다.");
             return true;
         }

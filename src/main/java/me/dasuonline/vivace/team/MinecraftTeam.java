@@ -2,6 +2,7 @@ package me.dasuonline.vivace.team;
 
 import jdk.internal.foreign.PlatformLayouts;
 import lombok.Getter;
+import me.dasuonline.vivace.team.manager.TeamUtils;
 import org.bukkit.entity.Player;
 
 import java.sql.Time;
@@ -13,10 +14,13 @@ import java.util.List;
 public class MinecraftTeam {
     String name;
     Timestamp createdTime;
+    String uniqueId;
 
     Player admin;
     List<Player> viceAdmin;
     List<Player> teamMember;
+
+    List<String> inviteCode;
 
     public MinecraftTeam(String name, Timestamp createdTime, Player admin) {
         this.name = name;
@@ -25,6 +29,9 @@ public class MinecraftTeam {
 
         this.viceAdmin = new ArrayList<>();
         this.teamMember = new ArrayList<>();
+        this.inviteCode = new ArrayList<>();
+
+        this.uniqueId = TeamUtils.getUniqueId();
     }
 
     public MinecraftTeam(String name, Timestamp createdTime, Player admin, List<Player> viceAdmin, List<Player> teamMember) {
@@ -33,6 +40,23 @@ public class MinecraftTeam {
         this.admin = admin;
         this.viceAdmin = viceAdmin;
         this.teamMember = teamMember;
+
+        this.inviteCode = new ArrayList<>();
+        this.uniqueId = TeamUtils.getUniqueId();
+    }
+
+    public boolean addMember(Player player) {
+        teamMember.add(player);
+
+        return true;
+    }
+
+    public void addInviteCode(String code) {
+        inviteCode.add(code);
+    }
+
+    public void removeInviteCode(String code) {
+        inviteCode.remove(code);
     }
 
     public boolean removePlayer(Player player) {

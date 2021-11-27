@@ -19,14 +19,20 @@ public class Join extends TeamUtils implements CustomExecutor {
             return true;
         }
 
-        String teamName = args[1];
+        String teamName = args[1].split(":")[0];
+        String inviteCode = args[1].split(":")[1];
 
-        if (!containsTeam(teamName)) {
+        if (!containsTeamName(teamName)) {
             teamManager.logMessage(player, ChatColor.RED + "그런 팀이 없습니다.");
             return true;
         }
 
-        MinecraftTeam nowTeam = getTeam(teamName);
+        MinecraftTeam nowTeam = getTeamByName(teamName);
+
+        if (!nowTeam.getInviteCode().contains(inviteCode)) {
+            teamManager.logMessage(player, ChatColor.RED + "잘못된 접근입니다. 팀이 삭제 / 수정된 것 같습니다.");
+            return true;
+        }
 
         if (isPlayerTeamMember(player, nowTeam)) {
             teamManager.logMessage(player, ChatColor.RED + "이미 들어가려는 팀에 소속되어 있습니다.");
@@ -40,6 +46,8 @@ public class Join extends TeamUtils implements CustomExecutor {
 
         nowTeam.getTeamMember().add(player);
         teamManager.logMessage(player, "[ " + teamName + " ]" + ChatColor.GREEN + " 팀에 가입했습니다!");
+
+        nowTeam.removeInviteCode(inviteCode);
 
         return true;
     }

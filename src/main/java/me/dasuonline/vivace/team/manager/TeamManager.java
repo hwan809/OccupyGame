@@ -23,16 +23,17 @@ public class TeamManager implements Manager {
         argsMap.put("도움말", new Help());
         argsMap.put("생성", new Create());
         argsMap.put("해체", new Dismantle());
-        argsMap.put("가입", new Join());
         argsMap.put("탈퇴", new Leave());
         argsMap.put("초대", new Invite());
         argsMap.put("수락", new Accept());
         argsMap.put("거절", new Reject());
         argsMap.put("추방", new Kick());
         argsMap.put("관리자", new Administrator());
-        argsMap.put("양도", new Transfer());
-        argsMap.put("메세지", new Message());
+        argsMap.put("채팅", new Message());
         argsMap.put("목록", new TeamList());
+
+        argsMap.put("설정", new TeamSettings());
+        argsMap.put("관리", new TeamSettings());
     }
 
     private void setExecutor() {

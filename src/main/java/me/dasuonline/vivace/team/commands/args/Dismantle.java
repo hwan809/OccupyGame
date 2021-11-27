@@ -22,12 +22,12 @@ public class Dismantle extends TeamUtils implements CustomExecutor {
 
         String teamName = args[1];
 
-        if (!containsTeam(teamName)) {
+        if (!containsTeamName(teamName)) {
             teamManager.logMessage(player, ChatColor.RED + "그런 팀이 없습니다.");
             return true;
         }
 
-        MinecraftTeam nowTeam = getTeam(teamName);
+        MinecraftTeam nowTeam = getTeamByName(teamName);
 
         if (!nowTeam.getAdmin().equals(player)) {
             teamManager.logMessage(player, ChatColor.RED + "팀의 대표만 팀을 해체할 수 있습니다.");
@@ -45,7 +45,7 @@ public class Dismantle extends TeamUtils implements CustomExecutor {
         teamManager = Main.getManager("Team");
     }
 
-    public boolean containsTeam(String teamName) {
+    public boolean containsTeamName(String teamName) {
         for (MinecraftTeam team : TeamManager.teamList) {
             if (team.getName().equals(teamName)) {
                 return true;

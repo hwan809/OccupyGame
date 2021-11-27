@@ -10,6 +10,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.apache.commons.lang.RandomStringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -17,7 +18,6 @@ import org.bukkit.entity.Player;
 public class Invite extends TeamUtils implements CustomExecutor {
 
     private Manager teamManager;
-    private TextComponent acceptMessage, rejectMessage;
 
     @Override
     public boolean execute(Player player, String[] args) {
@@ -45,12 +45,40 @@ public class Invite extends TeamUtils implements CustomExecutor {
             return true;
         }
 
-        TextComponent tempMessage = new TextComponent("[ " + inviteTeam.getName() + " ]" +
+        if (isPlayerTeamMember(invitedPlayer, inviteTeam)) {
+            teamManager.logMessage(player, ChatColor.RED + "이미 이 팀에 소속되어 있는 [플레이어] 입니다.");
+            return true;
+        }
+
+        if (isPlayerMember(invitedPlayer)) {
+            teamManager.logMessage(player, ChatColor.RED + "이미 다른 팀에 소속되어 있는 [플레이어] 입니다.");
+            return true;
+        }
+
+        TextComponent tempMessage = new TextComponent("[§a TEAM §f] > " + "[ " + inviteTeam.getName() + " ]" +
                 ChatColor.GREEN + " 팀의 마스터 " + ChatColor.WHITE + "[ " + player.getName() + " ] " +
                 ChatColor.GREEN + "의 초대가 왔습니다! " + ChatColor.WHITE + "<");
 
+        TextComponent acceptMessage, rejectMessage;
+        String inviteCode = RandomStringUtils.randomAlphanumeric(6);
+
+        acceptMessage = new TextComponent(ChatColor.GREEN + "수락" + ChatColor.WHITE);
+        acceptMessage.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,
+                "/팀 수락 " + inviteTeam.getUniqueId() + ":" + inviteCode));
+        acceptMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                new ComponentBuilder(ChatColor.YELLOW + "클릭하면 수락합니다.").create()));
+
+
+        rejectMessage = new TextComponent(ChatColor.RED + "거절" + ChatColor.WHITE);
+        rejectMessage.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,
+                "/팀 거절 " + inviteTeam.getUniqueId() + ":" + inviteCode));
+        rejectMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                new ComponentBuilder(ChatColor.YELLOW + "클릭하면 거절합니다.").create()));
+
+        teamManager.logMessage(player, "[ " + invitedPlayer.getName() + " ] " + ChatColor.GREEN + "님께 초대를 보냈습니다!");
         invitedPlayer.spigot().sendMessage(tempMessage, acceptMessage, new TextComponent(" | "), rejectMessage, new TextComponent(">"));
 
+        inviteTeam.addInviteCode(inviteCode);
 
         return true;
     }
@@ -58,15 +86,5 @@ public class Invite extends TeamUtils implements CustomExecutor {
     @Override
     public void init() {
         teamManager = Main.getManager("Team");
-
-        acceptMessage = new TextComponent(ChatColor.GREEN + "수락" + ChatColor.WHITE);
-        acceptMessage.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/팀 수락"));
-        acceptMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                new ComponentBuilder(ChatColor.YELLOW + "클릭하면 수락합니다.").create()));
-
-        rejectMessage = new TextComponent(ChatColor.RED + "거절" + ChatColor.WHITE);
-        rejectMessage.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/팀 거절"));
-        rejectMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                new ComponentBuilder(ChatColor.YELLOW + "클릭하면 거절합니다.").create()));
     }
 }

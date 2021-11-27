@@ -22,7 +22,8 @@ public class Leave extends TeamUtils implements CustomExecutor {
         MinecraftTeam playerTeam = getPlayerTeam(player);
 
         if (playerTeam.getAdmin().equals(player)) {
-            teamManager.logMessage(player, ChatColor.RED + "당신은 이 팀의 마스터입니다! 마스터는 팀에서 탈퇴할 수 없습니다.");
+            teamManager.logMessage(player, ChatColor.RED + "당신은 " + ChatColor.WHITE + "[ " +
+                    playerTeam.getName() + " ]" + ChatColor.RED + " 의 마스터입니다! 마스터는 팀에서 탈퇴할 수 없습니다.");
             return true;
         }
 
