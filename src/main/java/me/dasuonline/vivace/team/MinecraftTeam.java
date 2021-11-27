@@ -34,4 +34,18 @@ public class MinecraftTeam {
         this.viceAdmin = viceAdmin;
         this.teamMember = teamMember;
     }
+
+    public boolean removePlayer(Player player) {
+        if (viceAdmin.contains(player)) {
+            viceAdmin.remove(player);
+            return true;
+        }
+
+        if (teamMember.contains(player)) {
+            teamMember.remove(player);
+            return true;
+        }
+
+        return false;
+    }
 }
