@@ -1,9 +1,11 @@
-package me.dasuonline.vivace.team;
+package me.dasuonline.vivace.team.manager;
 
 import me.dasuonline.vivace.Main;
 import me.dasuonline.vivace.commands.interfaces.CustomExecutor;
 import me.dasuonline.vivace.commands.interfaces.Manager;
-import me.dasuonline.vivace.team.args.*;
+import me.dasuonline.vivace.team.MinecraftTeam;
+import me.dasuonline.vivace.team.commands.args.*;
+import me.dasuonline.vivace.team.commands.TeamCommands;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;

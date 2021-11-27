@@ -1,13 +1,10 @@
 package me.dasuonline.vivace;
 
 import me.dasuonline.vivace.commands.interfaces.Manager;
-import me.dasuonline.vivace.team.TeamCommands;
-import me.dasuonline.vivace.team.TeamManager;
+import me.dasuonline.vivace.team.manager.TeamManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.lang.management.ManagementPermission;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public final class Main extends JavaPlugin {

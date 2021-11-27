@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,6 +22,9 @@ public class MinecraftTeam {
         this.name = name;
         this.createdTime = createdTime;
         this.admin = admin;
+
+        this.viceAdmin = new ArrayList<>();
+        this.teamMember = new ArrayList<>();
     }
 
     public MinecraftTeam(String name, Timestamp createdTime, Player admin, List<Player> viceAdmin, List<Player> teamMember) {

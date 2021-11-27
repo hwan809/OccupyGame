@@ -1,16 +1,17 @@
-package me.dasuonline.vivace.team.args;
+package me.dasuonline.vivace.team.commands.args;
 
 import me.dasuonline.vivace.Main;
 import me.dasuonline.vivace.commands.interfaces.CustomExecutor;
 import me.dasuonline.vivace.commands.interfaces.Manager;
 import me.dasuonline.vivace.team.MinecraftTeam;
-import me.dasuonline.vivace.team.TeamManager;
+import me.dasuonline.vivace.team.manager.TeamManager;
+import me.dasuonline.vivace.team.manager.TeamUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.sql.Timestamp;
 
-public class Create implements CustomExecutor {
+public class Create extends TeamUtils implements CustomExecutor {
 
     private Manager teamManager;
 
@@ -51,15 +52,5 @@ public class Create implements CustomExecutor {
     @Override
     public void init() {
         teamManager = Main.getManager("Team");
-    }
-
-    public boolean containsTeam(String teamName) {
-        for (MinecraftTeam team : TeamManager.teamList) {
-            if (team.getName().equals(teamName)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

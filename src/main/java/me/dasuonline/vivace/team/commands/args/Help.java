@@ -1,9 +1,8 @@
-package me.dasuonline.vivace.team.args;
+package me.dasuonline.vivace.team.commands.args;
 
 import me.dasuonline.vivace.Main;
 import me.dasuonline.vivace.commands.interfaces.CustomExecutor;
 import me.dasuonline.vivace.commands.interfaces.Manager;
-import me.dasuonline.vivace.team.TeamManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 

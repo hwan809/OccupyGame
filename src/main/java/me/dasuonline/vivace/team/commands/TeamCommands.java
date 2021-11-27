@@ -1,13 +1,11 @@
-package me.dasuonline.vivace.team;
+package me.dasuonline.vivace.team.commands;
 
+import me.dasuonline.vivace.team.manager.TeamManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class TeamCommands implements CommandExecutor {
 
