@@ -55,7 +55,7 @@ public class Invite extends TeamUtils implements CustomExecutor {
             return true;
         }
 
-        TextComponent tempMessage = new TextComponent("[§a TEAM §f] > " + "[ " + inviteTeam.getName() + " ]" +
+        TextComponent tempMessage = new TextComponent("[§a TEAM §f] > " + "[ " + inviteTeam.getTeamName() + " ]" +
                 ChatColor.GREEN + " 팀의 마스터 " + ChatColor.WHITE + "[ " + player.getName() + " ] " +
                 ChatColor.GREEN + "의 초대가 왔습니다! " + ChatColor.WHITE + "<");
 

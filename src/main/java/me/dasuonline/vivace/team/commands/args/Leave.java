@@ -23,12 +23,12 @@ public class Leave extends TeamUtils implements CustomExecutor {
 
         if (playerTeam.getAdmin().equals(player)) {
             teamManager.logMessage(player, ChatColor.RED + "당신은 " + ChatColor.WHITE + "[ " +
-                    playerTeam.getName() + " ]" + ChatColor.RED + " 의 마스터입니다! 마스터는 팀에서 탈퇴할 수 없습니다.");
+                    playerTeam.getTeamName() + " ]" + ChatColor.RED + " 의 마스터입니다! 마스터는 팀에서 탈퇴할 수 없습니다.");
             return true;
         }
 
         if (playerTeam.removePlayer(player)) {
-            teamManager.logMessage(player, "[ " + playerTeam.getName() + " ]" + ChatColor.GREEN + " 팀에서 탈퇴했습니다!");
+            teamManager.logMessage(player, "[ " + playerTeam.getTeamName() + " ]" + ChatColor.GREEN + " 팀에서 탈퇴했습니다!");
         } else {
             teamManager.logMessage(player, ChatColor.RED + "ERROR - Leave Unable [Unexpected Exception] 관리자에게 문의하세요.");
         }

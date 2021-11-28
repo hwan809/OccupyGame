@@ -34,7 +34,7 @@ public class Reject extends TeamUtils implements CustomExecutor {
             return true;
         }
 
-        teamManager.logMessage(player,"[ " + nowTeam.getName() + " ]" + ChatColor.RED + " 팀의 초대를 거절했습니다!");
+        teamManager.logMessage(player,"[ " + nowTeam.getTeamName() + " ]" + ChatColor.RED + " 팀의 초대를 거절했습니다!");
         teamManager.logMessage(nowTeam.getAdmin(), "[ " + player.getName() + " ]" + ChatColor.RED + " 님이 초대를 거절했습니다!");
 
         nowTeam.removeInviteCode(inviteCode);

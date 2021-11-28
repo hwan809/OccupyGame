@@ -47,7 +47,7 @@ public class Dismantle extends TeamUtils implements CustomExecutor {
 
     public boolean containsTeamName(String teamName) {
         for (MinecraftTeam team : TeamManager.teamList) {
-            if (team.getName().equals(teamName)) {
+            if (team.getTeamName().equals(teamName)) {
                 return true;
             }
         }

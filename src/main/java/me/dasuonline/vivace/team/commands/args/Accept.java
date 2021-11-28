@@ -36,8 +36,8 @@ public class Accept extends TeamUtils implements CustomExecutor {
 
         nowTeam.addMember(player);
 
-        teamManager.logMessage(player,"[ " + nowTeam.getName() + " ]" + ChatColor.GREEN + " 팀에 가입했습니다!");
-        teamManager.logMessage(nowTeam.getAdmin(), "[ " + nowTeam.getName() + " ]" + ChatColor.GREEN + " 팀에 " +
+        teamManager.logMessage(player,"[ " + nowTeam.getTeamName() + " ]" + ChatColor.GREEN + " 팀에 가입했습니다!");
+        teamManager.logMessage(nowTeam.getAdmin(), "[ " + nowTeam.getTeamName() + " ]" + ChatColor.GREEN + " 팀에 " +
                 ChatColor.WHITE + "[ " + player.getName() + " ]" + ChatColor.GREEN + " 님이 가입했습니다!");
 
         nowTeam.removeInviteCode(inviteCode);

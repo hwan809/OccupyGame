@@ -2,7 +2,11 @@ package me.dasuonline.vivace.team.manager;
 
 import me.dasuonline.vivace.team.MinecraftTeam;
 import org.apache.commons.lang.RandomStringUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,7 +15,7 @@ import java.util.List;
 public class TeamUtils {
     public MinecraftTeam getTeamByName(String teamName) {
         for (MinecraftTeam team : TeamManager.teamList) {
-            if (team.getName().equals(teamName)) {
+            if (team.getTeamName().equals(teamName)) {
                 return team;
             }
         }
@@ -43,7 +47,7 @@ public class TeamUtils {
 
     public boolean containsTeamName(String teamName) {
         for (MinecraftTeam team : TeamManager.teamList) {
-            if (team.getName().equals(teamName)) {
+            if (team.getTeamName().equals(teamName)) {
                 return true;
             }
         }
@@ -91,5 +95,30 @@ public class TeamUtils {
         uniqueId = uniqueId + "_" + RandomStringUtils.randomAlphanumeric(6);
 
         return uniqueId;
+    }
+
+    public boolean isTeamItemStack(ItemStack itemStack) {
+        if (itemStack != null) {
+            Material teamMaterial = itemStack.getType();
+
+            return  teamMaterial == Material.GRASS ||
+                    teamMaterial == Material.ENDER_STONE ||
+                    teamMaterial == Material.DRAGON_EGG;
+        }
+
+        return false;
+    }
+
+    public MinecraftTeam getTeamByItemStack(ItemStack itemStack) {
+        ItemMeta im = itemStack.getItemMeta();
+        String uniqueId = ChatColor.stripColor(im.getLore().get(3));
+
+        for (MinecraftTeam tempTeam : TeamManager.teamList) {
+            if (uniqueId.contains(tempTeam.getUniqueId())) {
+                return tempTeam;
+            }
+        }
+
+        return null;
     }
 }
