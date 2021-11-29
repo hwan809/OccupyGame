@@ -28,11 +28,8 @@ public class Administrator extends TeamUtils implements CustomExecutor {
             return true;
         }
 
-        if (args.length < 2) {
-            teamManager.logMessage(player, ChatColor.RED + "관리자 [추가|삭제]");
-            return true;
-        } else if (args.length < 3) {
-            teamManager.logMessage(player, ChatColor.RED + "초대할 [플레이어] 닉네임을 입력해주세요.");
+        if (args.length < 3) {
+            teamManager.logMessage(player, ChatColor.RED + "/팀 관리자 [추가|삭제] [플레이어]");
             return true;
         }
 

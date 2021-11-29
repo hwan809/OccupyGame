@@ -4,6 +4,7 @@ import me.dasuonline.vivace.team.MinecraftTeam;
 import org.apache.commons.lang.RandomStringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -35,10 +36,20 @@ public class TeamUtils {
 
     public MinecraftTeam getPlayerTeam(Player player) {
         for (MinecraftTeam team : TeamManager.teamList) {
-            if (team.getAdmin().equals(player) ||
-                    team.getTeamMembers().contains(player) ||
-                    team.getViceAdmins().contains(player)) {
+            if (team.getAdmin().getUniqueId().equals(player.getUniqueId())) {
                 return team;
+            }
+
+            for (OfflinePlayer viceAdmins : team.getViceAdmins()) {
+                if (viceAdmins.getUniqueId().equals(player.getUniqueId())) {
+                    return team;
+                }
+            }
+
+            for (OfflinePlayer members : team.getTeamMembers()) {
+                if (members.getUniqueId().equals(player.getUniqueId())) {
+                    return team;
+                }
             }
         }
 
@@ -66,20 +77,40 @@ public class TeamUtils {
     }
 
     public boolean isPlayerTeamMember(Player player, MinecraftTeam team) {
-        List<Player> teamMembers = team.getTeamMembers();
-        List<Player> teamviceAdmins = team.getViceAdmins();
+        if (team.getAdmin().getUniqueId().equals(player.getUniqueId())) return true;
 
-        return teamMembers.contains(player) ||
-                teamviceAdmins.contains(player) ||
-                team.getAdmin().equals(player);
+        for (OfflinePlayer viceAdmins : team.getViceAdmins()) {
+            if (viceAdmins.getUniqueId().equals(player.getUniqueId())) {
+                return true;
+            }
+        }
+
+        for (OfflinePlayer members : team.getTeamMembers()) {
+            if (members.getUniqueId().equals(player.getUniqueId())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public boolean isPlayerMember(Player player) {
+
         for (MinecraftTeam team : TeamManager.teamList) {
-            if (team.getAdmin().equals(player) ||
-                    team.getTeamMembers().contains(player) ||
-                    team.getViceAdmins().contains(player)) {
+            if (team.getAdmin().getUniqueId().equals(player.getUniqueId())) {
                 return true;
+            }
+
+            for (OfflinePlayer viceAdmins : team.getViceAdmins()) {
+                if (viceAdmins.getUniqueId().equals(player.getUniqueId())) {
+                    return true;
+                }
+            }
+
+            for (OfflinePlayer members : team.getTeamMembers()) {
+                if (members.getUniqueId().equals(player.getUniqueId())) {
+                    return true;
+                }
             }
         }
 
@@ -95,6 +126,14 @@ public class TeamUtils {
         uniqueId = uniqueId + "_" + RandomStringUtils.randomAlphanumeric(6);
 
         return uniqueId;
+    }
+
+    public String getTeamTitle(int teamLevel) {
+        if (teamLevel == 0) return "§a파티§f";
+        if (teamLevel == 1) return "§e팀§f";
+        if (teamLevel == 2) return "§f크§0루§f";
+
+        return "NULL";
     }
 
     public boolean isTeamItemStack(ItemStack itemStack) {

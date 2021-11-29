@@ -32,6 +32,9 @@ public final class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        for (Manager classes : systemManagers) {
+            classes.save();
+        }
     }
 
     public static Manager getManager(String s) {

@@ -42,36 +42,25 @@ public class Help implements CustomExecutor {
         helpMessages.add(
                 new String[]
                         {"§8§m            §f§8[ §aTEAM §f§8]§8§m            ",
-                         "",
-                         "§a/팀 도움말 [ 페이지 ]",
-                         "§a/팀 생성 [ 팀 이름 ]",
-                         "§a/팀 해체 [ 팀 이름 ]",
-                         "§a/팀 가입 [ 팀 이름 ]",
-                         "§a/팀 탈퇴 [ 팀 이름 ]",
-                         "§a/팀 초대 [ 플레이어 ]",
-                         "                    §epage (1 / 3)"}
+                                 "",
+                                 "§a/팀 도움말 [ 페이지 ]",
+                                 "§a/팀 생성 [ 팀 이름 ]",
+                                 "§a/팀 해체 [ 팀 이름 ]",
+                                 "§a/팀 탈퇴 [ 플레이어 ]",
+                                 "§a/팀 초대 [ 팀 이름 ]",
+                                 "                    §epage (1 / 2)"}
         );
 
         helpMessages.add(
                 new String[]
                         {"§8§m            §f§8[ §aTEAM §f§8]§8§m            ",
                                 "",
-                                "§a/팀 수락 [ 플레이어 ]",
-                                "§a/팀 거절 [ 플레이어 ]",
                                 "§a/팀 추방 [ 플레이어 ]",
-                                "§a/팀 관리자 [ 플레이어 ]",
-                                "§a/팀 양도 [ 플레이어 ]",
+                                "§a/팀 관리자 [추가 | 삭제] [ 플레이어 ]",
+                                "§a/팀 채팅 [ 메시지 ]",
+                                "§a/팀 목록 [ 플레이어 ]",
                                 "§a/팀 메세지 [ 할 말 ]",
-                                "                    §epage (2 / 3)"}
-        );
-
-        helpMessages.add(
-                new String[]
-                        {"§8§m            §f§8[ §aTEAM §f§8]§8§m            ",
-                                "",
-                                "§a/팀 목록",
-                                "",
-                                "                     §epage (3 / 3)"}
+                                "                    §epage (2 / 2)"}
         );
 
         teamManager = Main.getManager("Team");

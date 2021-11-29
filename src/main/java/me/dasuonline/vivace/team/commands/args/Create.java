@@ -17,6 +17,11 @@ public class Create extends TeamUtils implements CustomExecutor {
 
     @Override
     public boolean execute(Player player, String[] args) {
+        if (!player.getInventory().contains(TeamManager.teamCreateItem)) {
+            teamManager.logMessage(player, ChatColor.RED + "[팀 생성권] 이 없습니다.");
+            return true;
+        }
+
         if (args.length < 2) { // /팀 생성 x
             teamManager.logMessage(player, ChatColor.RED + "[팀 이름] 을 설정해주세요.");
             return true;
@@ -50,6 +55,8 @@ public class Create extends TeamUtils implements CustomExecutor {
 
         TeamManager.teamList.add(newTeam);
         teamManager.logMessage(player,"[ " + teamName + " ]" + ChatColor.GREEN + " 팀을 생성했습니다!");
+
+        player.getInventory().remove(TeamManager.teamCreateItem);
 
         return true;
     }

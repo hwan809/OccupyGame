@@ -7,6 +7,8 @@ import me.dasuonline.vivace.util.PlayerHead;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -22,15 +24,15 @@ public class MinecraftTeam {
     Timestamp createdTime;
     String uniqueId;
 
-    Player admin;
-    List<Player> viceAdmins;
-    List<Player> teamMembers;
+    OfflinePlayer admin;
+    List<OfflinePlayer> viceAdmins;
+    List<OfflinePlayer> teamMembers;
 
     List<String> inviteCode;
 
     int teamLevel = 0;
 
-    public MinecraftTeam(String name, Timestamp createdTime, Player admin) {
+    public MinecraftTeam(String name, Timestamp createdTime, OfflinePlayer admin) {
         this.teamName = name;
         this.createdTime = createdTime;
         this.admin = admin;
@@ -42,7 +44,7 @@ public class MinecraftTeam {
         this.uniqueId = TeamUtils.getUniqueId();
     }
 
-    public MinecraftTeam(String name, Timestamp createdTime, Player admin, List<Player> viceAdmin, List<Player> teamMember, String uniqueId, int teamLevel) {
+    public MinecraftTeam(String name, Timestamp createdTime, OfflinePlayer admin, List<OfflinePlayer> viceAdmin, List<OfflinePlayer> teamMember, String uniqueId, int teamLevel) {
         this.teamName = name;
         this.createdTime = createdTime;
         this.admin = admin;
@@ -54,10 +56,32 @@ public class MinecraftTeam {
         this.inviteCode = new ArrayList<>();
     }
 
-    public boolean addMember(Player player) {
-        teamMembers.add(player);
+    public void saveAsConfig(FileConfiguration configFile, String path) {
+        String customTeamPath = path + "." + this.teamName;
 
-        return true;
+        configFile.set(customTeamPath + ".teamName", teamName);
+        configFile.set(customTeamPath + ".createdTime", createdTime.toString());
+        configFile.set(customTeamPath + ".admin", admin);
+        configFile.set(customTeamPath + ".uniqueId", uniqueId);
+        configFile.set(customTeamPath + ".teamLevel", teamLevel);
+
+        List<String> viceAdminIds = new ArrayList<>();
+        List<String> teamMemberIds = new ArrayList<>();
+
+        for (OfflinePlayer viceadmin : viceAdmins) {
+            viceAdminIds.add(viceadmin.getUniqueId().toString());
+        }
+
+        for (OfflinePlayer teamMember : teamMembers) {
+            teamMemberIds.add(teamMember.getUniqueId().toString());
+        }
+
+        configFile.set(customTeamPath + ".viceAdmins", viceAdminIds);
+        configFile.set(customTeamPath + ".teamMembers", teamMemberIds);
+    }
+
+    public void addMember(Player player) {
+        teamMembers.add(player);
     }
 
     public void addViceAdmin(Player player) {
@@ -70,13 +94,34 @@ public class MinecraftTeam {
         teamMembers.add(player);
     }
 
+    public void changeAdmin(Player player) {
+        teamMembers.add(admin);
+        admin = player;
+    }
+
+    public void upgrade() {
+        if (teamLevel != 2) {
+            teamLevel++;
+        }
+    }
+
+    public void upgradeTo(int teamLevel) {
+        this.teamLevel = teamLevel;
+    }
+
     public void sendMessage(Player p, String message) {
         String pmessage = "[§a TEAM §f] > [ " + p.getName() + " ] " + message;
 
-        admin.sendMessage(pmessage);
+        admin.getPlayer().sendMessage(pmessage);
 
-        for (Player va : viceAdmins) va.sendMessage(pmessage);
-        for (Player mb : teamMembers) mb.sendMessage(pmessage);
+        for (OfflinePlayer va : viceAdmins) {
+            if (va.isOnline()) {
+                va.getPlayer().sendMessage(pmessage);
+            }
+        }
+        for (OfflinePlayer mb : teamMembers) {
+            mb.getPlayer().sendMessage(pmessage);
+        }
     }
 
     public void addInviteCode(String code) {
@@ -153,5 +198,29 @@ public class MinecraftTeam {
         } else {
             return Material.AIR;
         }
+    }
+
+    public int getTeamPlayersNum() {
+        return 1 + viceAdmins.size() + teamMembers.size();
+    }
+
+    public boolean isTeamFull() {
+        int nowPlayerAmount = getTeamPlayersNum();
+
+        if (teamLevel == 0 && nowPlayerAmount == 15) {
+            return true;
+        } else if (teamLevel == 1 && nowPlayerAmount == 30) {
+            return true;
+        } else if (teamLevel == 2 && nowPlayerAmount == 30) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean isTeamUpgradeAble() {
+        if (teamLevel != 2) return isTeamFull();
+
+        return false;
     }
 }
