@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Help implements CustomExecutor {
 
-    private ArrayList<String[]> helpMessages = new ArrayList<>();
+    private final ArrayList<String[]> helpMessages = new ArrayList<>();
     private Manager teamManager;
 
     @Override

@@ -34,11 +34,10 @@ public class TeamUpgrade extends TeamUtils implements CustomExecutor {
 
         if (playerTeam.isTeamUpgradeAble()) {
             teamManager.logMessage(player, ChatColor.GREEN + "팀을 " + getTeamTitle(playerTeam.getTeamLevel()) + "으로 업그레이드 했습니다!");
-            return true;
         } else {
             teamManager.logMessage(player, ChatColor.RED + "팀 업그레이드 요건을 충족하지 못합니다.");
-            return true;
         }
+        return true;
     }
 
     @Override

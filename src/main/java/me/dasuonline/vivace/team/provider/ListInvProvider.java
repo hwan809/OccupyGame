@@ -23,7 +23,7 @@ import java.util.function.BinaryOperator;
 public class ListInvProvider implements InventoryProvider {
 
     private Manager teamManager;
-    private ItemStack borderItem = new ItemStackBuilder(Material.STAINED_GLASS_PANE).setName(ChatColor.GREEN + " ").build();
+    private final ItemStack borderItem = new ItemStackBuilder(Material.STAINED_GLASS_PANE).setName(ChatColor.GREEN + " ").build();
 
     @Override
     public void init(Player player, InventoryContents contents) {

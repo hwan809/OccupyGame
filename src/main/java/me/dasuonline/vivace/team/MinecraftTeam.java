@@ -211,11 +211,7 @@ public class MinecraftTeam {
             return true;
         } else if (teamLevel == 1 && nowPlayerAmount == 30) {
             return true;
-        } else if (teamLevel == 2 && nowPlayerAmount == 30) {
-            return true;
-        }
-
-        return false;
+        } else return teamLevel == 2 && nowPlayerAmount == 30;
     }
 
     public boolean isTeamUpgradeAble() {

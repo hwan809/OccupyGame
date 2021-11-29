@@ -82,10 +82,10 @@ public class TeamManager implements Manager {
     }
 
     private void getConfigData() {
-        ConfigurationSection configteamList = teamConfig.getConfigurationSection("teams");
+        ConfigurationSection configureList = teamConfig.getConfigurationSection("teams");
 
-        if (configteamList != null) {
-            for (String teamName : configteamList.getValues(false).keySet()) {
+        if (configureList != null) {
+            for (String teamName : configureList.getValues(false).keySet()) {
                 Main.getInstance().getLogger().info(ChatColor.RED + "[ LOADING TEAM ] > " + ChatColor.GOLD + teamName);
                 teamList.add(loadAsConfig(teamConfig, "teams", teamName));
             }

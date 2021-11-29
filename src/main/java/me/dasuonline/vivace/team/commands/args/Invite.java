@@ -38,7 +38,7 @@ public class Invite extends TeamUtils implements CustomExecutor {
             return true;
         }
 
-        Player invitedPlayer = Bukkit.getPlayer(args[1]);;
+        Player invitedPlayer = Bukkit.getPlayer(args[1]);
 
         if (invitedPlayer == null) {
             teamManager.logMessage(player, ChatColor.RED + "그런 이름의 [플레이어] 가 없습니다.");
