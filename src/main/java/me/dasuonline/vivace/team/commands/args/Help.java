@@ -59,7 +59,6 @@ public class Help implements CustomExecutor {
                                 "§a/팀 관리자 [추가 | 삭제] [ 플레이어 ]",
                                 "§a/팀 채팅 [ 메시지 ]",
                                 "§a/팀 목록 [ 플레이어 ]",
-                                "§a/팀 메세지 [ 할 말 ]",
                                 "                    §epage (2 / 2)"}
         );
 

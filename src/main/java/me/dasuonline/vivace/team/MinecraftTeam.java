@@ -176,6 +176,7 @@ public class MinecraftTeam {
 
         teamLogo.addLore("")
                 .addLore(ChatColor.GOLD + "< 아이콘 > " + ChatColor.WHITE + getTeamMaterial().name())
+                .addLore(ChatColor.GOLD + "< 등급 > " + getTeamLevelTitle())
                 .addLore(ChatColor.GOLD + "< 설립 날짜 > " + ChatColor.WHITE + timeString);
 
         teamAdmin.addLore("")
@@ -198,6 +199,17 @@ public class MinecraftTeam {
         } else {
             return Material.AIR;
         }
+    }
+
+
+    //§
+
+    public String getTeamLevelTitle() {
+        if (teamLevel == 0) return "§a파티";
+        if (teamLevel == 1) return "§e팀";
+        if (teamLevel == 2) return "§f크&0루";
+
+        return "TEAM";
     }
 
     public int getTeamPlayersNum() {

@@ -13,21 +13,17 @@ import me.dasuonline.vivace.team.manager.TeamManager;
 import me.dasuonline.vivace.util.ItemStackBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.function.BinaryOperator;
 
 public class ListInvProvider implements InventoryProvider {
 
-    private Manager teamManager;
-    private final ItemStack borderItem = new ItemStackBuilder(Material.STAINED_GLASS_PANE).setName(ChatColor.GREEN + " ").build();
+    private final ItemStack borderItem = new ItemStackBuilder(Material.STAINED_GLASS_PANE)
+            .setName(ChatColor.GREEN + " ").build();
 
     @Override
     public void init(Player player, InventoryContents contents) {
-        teamManager = Main.getManager("Team");
+        Manager teamManager = Main.getManager("Team");
 
         ClickableItem[] items = new ClickableItem[TeamManager.teamList.size()];
 

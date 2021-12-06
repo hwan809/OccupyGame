@@ -30,20 +30,28 @@ public class TeamSettings extends TeamUtils implements CustomExecutor {
 
         if (command.equals("생성권")) {
             ItemStack createItem = player.getInventory().getItemInMainHand();
-            if (createItem.getType().equals(Material.AIR)) {
+
+            if (createItem == null || createItem.getType().equals(Material.AIR)) {
                 teamManager.logMessage(player, ChatColor.RED + "손에 설정할 팀 생성권 아이템을 들고 명령어를 입력해주세요.");
                 return true;
             }
 
             TeamManager.teamCreateItem = createItem;
+
+            teamManager.logMessage(player, ChatColor.RED + "팀 생성권을 설정했습니다.");
+            return true;
         } else if (command.equals("업그레이드권")) {
             ItemStack upgradeItem = player.getInventory().getItemInMainHand();
-            if (upgradeItem.getType().equals(Material.AIR)) {
+
+            if (upgradeItem == null || upgradeItem.getType().equals(Material.AIR)) {
                 teamManager.logMessage(player, ChatColor.RED + "손에 설정할 팀 업그레이드권 아이템을 들고 명령어를 입력해주세요.");
                 return true;
             }
 
             TeamManager.teamUpgradeItem = upgradeItem;
+
+            teamManager.logMessage(player, ChatColor.RED + "팀 업그레이드권을 설정했습니다.");
+            return true;
         } else if (command.equals("강제해체")) {
             if (args.length < 3) {
                 teamManager.logMessage(player, ChatColor.RED + "해체할 팀 이름을 입력하세요.");

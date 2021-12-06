@@ -15,9 +15,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Invite extends TeamUtils implements CustomExecutor {
 
     private Manager teamManager;
+
+    private Map<String, Long> inviteCooldowns = new HashMap<>();
 
     @Override
     public boolean execute(Player player, String[] args) {
@@ -43,6 +48,20 @@ public class Invite extends TeamUtils implements CustomExecutor {
         if (invitedPlayer == null) {
             teamManager.logMessage(player, ChatColor.RED + "그런 이름의 [플레이어] 가 없습니다.");
             return true;
+        }
+
+        String playersKey = player.getUniqueId().toString() + invitedPlayer.getUniqueId().toString();
+
+        if (inviteCooldowns.containsKey(playersKey)) {
+            long timeStamp = inviteCooldowns.get(playersKey);
+
+            if (timeStamp > System.currentTimeMillis()) {
+                long timeLeft = (timeStamp - System.currentTimeMillis()) / 1000;
+
+                teamManager.logMessage(player, ChatColor.RED + invitedPlayer.getName() + "님에게, "
+                        + timeLeft + "초 이후 초대를 보낼 수 있습니다.");
+                return true;
+            }
         }
 
         if (isPlayerTeamMember(invitedPlayer, inviteTeam)) {
@@ -79,6 +98,7 @@ public class Invite extends TeamUtils implements CustomExecutor {
         invitedPlayer.spigot().sendMessage(tempMessage, acceptMessage, new TextComponent(" | "), rejectMessage, new TextComponent(">"));
 
         inviteTeam.addInviteCode(inviteCode);
+        inviteCooldowns.put(playersKey, System.currentTimeMillis() + (1000 * 1800));
 
         return true;
     }

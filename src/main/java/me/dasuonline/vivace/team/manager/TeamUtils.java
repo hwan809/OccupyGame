@@ -128,14 +128,6 @@ public class TeamUtils {
         return uniqueId;
     }
 
-    public String getTeamTitle(int teamLevel) {
-        if (teamLevel == 0) return "§a파티§f";
-        if (teamLevel == 1) return "§e팀§f";
-        if (teamLevel == 2) return "§f크§0루§f";
-
-        return "NULL";
-    }
-
     public boolean isTeamItemStack(ItemStack itemStack) {
         if (itemStack != null) {
             Material teamMaterial = itemStack.getType();
