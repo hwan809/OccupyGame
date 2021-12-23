@@ -231,4 +231,14 @@ public class MinecraftTeam {
 
         return false;
     }
+
+    public List<OfflinePlayer> getAllTeamPlayers() {
+
+        List<OfflinePlayer> returnList = new ArrayList<>(teamMembers);
+
+        returnList.addAll(viceAdmins);
+        returnList.add(admin);
+
+        return returnList;
+    }
 }

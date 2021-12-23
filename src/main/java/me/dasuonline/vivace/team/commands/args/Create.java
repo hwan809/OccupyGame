@@ -27,7 +27,7 @@ public class Create extends TeamUtils implements CustomExecutor {
             return true;
         }
 
-        if (isPlayerMember(player)) {
+        if (playerHasTeam(player)) {
             teamManager.logMessage(player, ChatColor.RED + "이미 팀에 소속되어 있습니다.");
             return true;
         }

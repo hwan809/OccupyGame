@@ -5,3 +5,7 @@ authors: [ vivace ]
 commands:
   팀:
     usage: "[ §aTEAM§f ] > [ §e/팀 도움말 <페이지 번호>§f ]"
+  구역:
+    usage: "점령지 구역을 설정합니다."
+  점령전:
+    usage: "점령전 사이클을 시작합니다."

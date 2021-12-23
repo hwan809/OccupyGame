@@ -24,7 +24,6 @@ import java.util.*;
 
 public class TeamManager implements Manager {
     public static Map<String, CustomExecutor> argsMap = new HashMap<>();
-    public static List<CustomExecutor> argsExecutor = new ArrayList<>();
 
     public static List<MinecraftTeam> teamList = new ArrayList<>();
 
@@ -53,9 +52,8 @@ public class TeamManager implements Manager {
     }
 
     private void setExecutor() {
-        argsExecutor.addAll(argsMap.values());
 
-        for (CustomExecutor ce : argsExecutor) {
+        for (CustomExecutor ce : argsMap.values()) {
             ce.init();
         }
     }
@@ -143,7 +141,7 @@ public class TeamManager implements Manager {
         createConfig();
         getConfigData();
 
-        Main.getPlugin(Main.class).getCommand(TeamCommands.cmd1).setExecutor(new TeamCommands());
+        Main.getInstance().getCommand(TeamCommands.cmd1).setExecutor(new TeamCommands());
     }
 
     @Override
@@ -158,7 +156,7 @@ public class TeamManager implements Manager {
 
     @Override
     public String getName() {
-        return "Team";
+        return "팀 기능";
     }
 }
 

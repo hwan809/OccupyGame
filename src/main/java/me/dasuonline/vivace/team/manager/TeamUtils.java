@@ -94,7 +94,7 @@ public class TeamUtils {
         return false;
     }
 
-    public boolean isPlayerMember(Player player) {
+    public boolean playerHasTeam(Player player) {
 
         for (MinecraftTeam team : TeamManager.teamList) {
             if (team.getAdmin().getUniqueId().equals(player.getUniqueId())) {

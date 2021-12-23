@@ -41,7 +41,6 @@ public class Accept extends TeamUtils implements CustomExecutor {
                 ChatColor.WHITE + "[ " + player.getName() + " ]" + ChatColor.GREEN + " 님이 가입했습니다!");
 
         nowTeam.removeInviteCode(inviteCode);
-        nowTeam.removeInviteCode(inviteCode);
 
         return true;
 

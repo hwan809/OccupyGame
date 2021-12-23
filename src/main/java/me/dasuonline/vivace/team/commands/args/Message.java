@@ -24,7 +24,7 @@ public class Message extends TeamUtils implements CustomExecutor {
         }
         String message = sb.toString().trim();
 
-        if (!isPlayerMember(player)) {
+        if (!playerHasTeam(player)) {
             teamManager.logMessage(player, ChatColor.RED + "팀에 소속되어 있지 않습니다.");
             return true;
         }

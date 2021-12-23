@@ -5,7 +5,6 @@ import me.dasuonline.vivace.commands.interfaces.CustomExecutor;
 import me.dasuonline.vivace.commands.interfaces.Manager;
 import me.dasuonline.vivace.team.MinecraftTeam;
 import me.dasuonline.vivace.team.manager.TeamUtils;
-import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -26,7 +25,7 @@ public class Invite extends TeamUtils implements CustomExecutor {
 
     @Override
     public boolean execute(Player player, String[] args) {
-        if (!isPlayerMember(player)) {
+        if (!playerHasTeam(player)) {
             teamManager.logMessage(player, ChatColor.RED + "팀에 소속되어 있지 않습니다.");
             return true;
         }
@@ -69,7 +68,7 @@ public class Invite extends TeamUtils implements CustomExecutor {
             return true;
         }
 
-        if (isPlayerMember(invitedPlayer)) {
+        if (playerHasTeam(invitedPlayer)) {
             teamManager.logMessage(player, ChatColor.RED + "이미 다른 팀에 소속되어 있는 [플레이어] 입니다.");
             return true;
         }

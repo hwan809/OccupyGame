@@ -92,7 +92,7 @@ public class TeamSettings extends TeamUtils implements CustomExecutor {
                 return true;
             }
 
-            if (isPlayerMember(newAdmin)) {
+            if (playerHasTeam(newAdmin)) {
                 if (!getPlayerTeam(newAdmin).equals(nowTeam)) {
                     teamManager.logMessage(player, ChatColor.RED + "다른 팀에 소속되어 있는 [플레이어] 입니다.");
                     return true;

@@ -15,7 +15,7 @@ public class Kick extends TeamUtils implements CustomExecutor {
 
     @Override
     public boolean execute(Player player, String[] args) {
-        if (!isPlayerMember(player)) {
+        if (!playerHasTeam(player)) {
             teamManager.logMessage(player, ChatColor.RED + "팀에 소속되어 있지 않습니다.");
             return true;
         }
@@ -41,7 +41,7 @@ public class Kick extends TeamUtils implements CustomExecutor {
 
         if (removePlayer.equals(player)) return false;
 
-        if (isPlayerMember(removePlayer)) {
+        if (playerHasTeam(removePlayer)) {
             if (!getPlayerTeam(player).equals(playerTeam)) {
                 teamManager.logMessage(player, ChatColor.RED + "다른 팀에 소속되어 있는 [플레이어] 입니다.");
                 return true;

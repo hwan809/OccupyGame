@@ -1,6 +1,7 @@
 package me.dasuonline.vivace;
 
 import me.dasuonline.vivace.commands.interfaces.Manager;
+import me.dasuonline.vivace.occupy.manager.OccupyManager;
 import me.dasuonline.vivace.team.manager.TeamManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,6 +24,7 @@ public final class Main extends JavaPlugin {
         instance = this;
 
         systemManagers.add(new TeamManager());
+        systemManagers.add(new OccupyManager());
 
         for (Manager classes : systemManagers) {
             classes.init();

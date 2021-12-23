@@ -15,7 +15,7 @@ public class TeamUpgrade extends TeamUtils implements CustomExecutor {
 
     @Override
     public boolean execute(Player player, String[] args) {
-        if (!isPlayerMember(player)) {
+        if (!playerHasTeam(player)) {
             teamManager.logMessage(player, ChatColor.RED + "팀에 소속되어 있지 않습니다.");
             return true;
         }

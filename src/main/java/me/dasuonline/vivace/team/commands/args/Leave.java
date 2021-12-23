@@ -14,7 +14,7 @@ public class Leave extends TeamUtils implements CustomExecutor {
 
     @Override
     public boolean execute(Player player, String[] args) {
-        if (!isPlayerMember(player)) {
+        if (!playerHasTeam(player)) {
             teamManager.logMessage(player, ChatColor.RED + "소속된 팀이 없습니다.");
             return true;
         }
