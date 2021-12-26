@@ -65,7 +65,7 @@ public class LandManager implements Listener, CommandExecutor {
         Block b1 = leftPoints.get(player.getName());
         Block b2 = rightPoints.get(player.getName());
 
-        OccupyLand newLand = new OccupyLand(b1.getLocation(), b2.getLocation());
+        OccupyLand newLand = new OccupyLand(b1.getLocation(), b2.getLocation(), OccupyManager.landList.size());
 
         OccupyManager.landList.add(newLand);
 

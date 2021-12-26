@@ -2,7 +2,7 @@ package me.dasuonline.vivace.occupy.manager;
 
 import me.dasuonline.vivace.Main;
 import me.dasuonline.vivace.commands.interfaces.Manager;
-import me.dasuonline.vivace.occupy.listener.GameStarter;
+import me.dasuonline.vivace.occupy.listener.GameCommandExecutor;
 import me.dasuonline.vivace.occupy.listener.LandManager;
 import me.dasuonline.vivace.occupy.system.OccupyGame;
 import me.dasuonline.vivace.occupy.system.OccupyLand;
@@ -22,7 +22,7 @@ public class OccupyManager implements Manager {
         Bukkit.getPluginManager().registerEvents(new LandManager(), Main.getInstance());
 
         Main.getInstance().getCommand("구역").setExecutor(new LandManager());
-        Main.getInstance().getCommand("점령전").setExecutor(new GameStarter());
+        Main.getInstance().getCommand("점령전").setExecutor(new GameCommandExecutor());
     }
 
     @Override

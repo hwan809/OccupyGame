@@ -94,6 +94,8 @@ public class TeamManager implements Manager {
     }
 
     private void saveConfigData() {
+        teamConfig.set("teams", null);
+
         for (MinecraftTeam minecraftTeam : teamList) {
             minecraftTeam.saveAsConfig(teamConfig, "teams");
         }
@@ -156,7 +158,7 @@ public class TeamManager implements Manager {
 
     @Override
     public String getName() {
-        return "팀 기능";
+        return "Team";
     }
 }
 
